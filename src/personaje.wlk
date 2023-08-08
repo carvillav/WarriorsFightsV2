@@ -1,6 +1,7 @@
 import wollok.game.*
 import arma.*
 import areaImagen.*
+import barraDeVida.*
 
 class Personaje {
 	
@@ -14,7 +15,7 @@ class Personaje {
 	var property audioAtaque
 	
 	method agregarArma()/*= pantallaPrincipal.mostrar(self.arma()) */
-	method atacar() = arma.movimiento()
+	method atacar() {arma.movimiento()} 
 	method posicionarArma()
 	method recibeAtaque(personaje){
 		if(personaje.arma().colisionoConPersonaje(self) && self.vida()>=personaje.arma().poderLetalidad()){
@@ -29,7 +30,7 @@ class Personaje {
 	method posicionarVida() {
 		const x = self.posicionBarraVida().x()
 		const y = self.posicionBarraVida().y()
-		//self.barraVida().position(self.position().x() + x, self.position().y() + y)
+		self.barraVida().position(self.position().x() + x, self.position().y() + y)
 	}
 	method agregarVida(){
 		self.posicionarVida()
@@ -37,7 +38,7 @@ class Personaje {
 	}
 	method restarVida(cantidad){
 		vida -= cantidad
-		//self.barraVida().actualizar(self)
+		self.barraVida().actualizar(self)
 	}
 	method meQuedeSinVida() = self.vida() == 0
 	
